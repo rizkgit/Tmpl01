@@ -1,0 +1,87 @@
+<div class="container col col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <form class='jumbotron'>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control" placeholder="First Name" name='Txt_FIRST_NAME' [(ngModel)]='person.FIRST_NAME'>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control" placeholder="Last Name" name='Txt_LAST_NAME' [(ngModel)]='person.LAST_NAME'>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Email" name="Txt_EMAIL" [(ngModel)]='person.EMAIL'>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input type="date" class="form-control" placeholder="Date Of Birth" name="Txt_DOB" [(ngModel)]='person.DOB'>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" aria-label="Checkbox for following text input" name="Txt_IS_BLACK_LISTED" [(ngModel)]='person.IS_BLACK_LISTED'>
+                </span>
+                <input type="text" disabled class="form-control" value="Is Black Listed?">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-keyboard-o"></i></span>
+                <select class="form-control" name="DDL_PROFESSION" [(ngModel)]='person.PROFESSION_ID'>
+                    <option *ngFor='let profession of professionList' value={{profession.PROFESSION_ID}}>
+                        {{profession.DESCRIPTION}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <div class='form-control'>
+                    <label *ngFor='let gender of genderList' class="radio-inline">
+                         <input type="radio" 
+                                name="rd_gender" 
+                                [value]='gender.GENDER_ID'
+                                [(ngModel)]='person.GENDER_ID'>{{gender.DESCRIPTION}}
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-keyboard-o"></i></span>
+                <textarea class="form-control custom-control" rows="3" style="resize:none" name="Txt_SUMMARY" [(ngModel)]='person.SUMMARY'></textarea>
+            </div>
+        </div>
+        <div class="btn-group btn-group-justified">
+            <a href="#" class="btn btn-primary" (click)='Edit_Person()'>Save</a>
+            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">Delete</a>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                Confimation
+            </div>
+            <div class="modal-body">
+                Are you sure you want to remove it ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger btn-ok" data-dismiss="modal">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>

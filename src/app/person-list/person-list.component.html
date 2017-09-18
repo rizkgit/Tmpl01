@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="form-inline jumbotron">
+        <div class="form-group">
+            <label for="Search_Txt_FIRST_NAME">First Name</label>
+            <input type="email" class="form-control" id="Search_Txt_FIRST_NAME" [(ngModel)]='searchCriteria.FIRST_NAME'>
+        </div>
+        <div class="form-group">
+            <label for="Search_Txt_LAST_NAME">Last Name</label>
+            <input type="email" class="form-control" id="Search_Txt_LAST_NAME" [(ngModel)]='searchCriteria.LAST_NAME'>
+        </div>
+        <!-- <button type="submit" class="btn btn-primary" (click)='Fetch_Data()'>Search</button> -->
+    </div>
+</div>
+<div class="container">
+    <div class="btn-group btn-group-justified">
+        <a href="#" class="btn btn-primary" (click)='Fetch_Data()'>
+            <span class="glyphicon glyphicon-search"></span> Search
+        </a>
+        <a href="#" class="btn btn-info" (click)='Add_Person()'>
+            <span class="glyphicon glyphicon-plus"></span> Add
+        </a>
+    </div>
+</div>
+<div style="height: 10px;"></div>
+<div class="container">
+    <div class="row">
+        <app-person-detail [person]='person' *ngFor='let person of result'></app-person-detail>
+    </div>
+</div>
