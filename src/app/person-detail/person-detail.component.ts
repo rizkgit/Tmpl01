@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Person, Params_Get_Gender_By_OWNER_ID, Profession, Gender, Proxy, Params_Get_Profession_By_OWNER_ID, } from '../proxy';
+import { Person, Params_Get_Gender_By_OWNER_ID, Profession, Gender, Proxy, Params_Get_Profession_By_OWNER_ID, Params_Delete_Person, } from '../proxy';
 
 @Component({
   selector: 'app-person-detail',
@@ -37,6 +37,13 @@ export class PersonDetailComponent implements OnInit {
     this.proxy.Edit_Person(this.person).subscribe((data)=>{
       alert(data.PERSON_ID);
     });
+  }
+
+  Delete_Person(person: Person){
+    const p = new Params_Delete_Person();
+    p.PERSON_ID = person.PERSON_ID;
+    this.proxy.Delete_Person(p).subscribe(()=>{alert('Mabrouk, Deleted');})
+
   }
 
 }

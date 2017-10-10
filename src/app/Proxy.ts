@@ -9,7 +9,7 @@ export class Proxy {
     APIBaseUrl: string = '';
     url: string = '';
     ticket: string = '';
-    constructor(public api: Http, private common: CommonService) { this.APIBaseUrl = common.APIUrl; this.ticket = this.common.ticket;}
+    constructor(public api: Http, private common: CommonService) { this.APIBaseUrl = common.APIUrl; this.ticket = this.common.ticket; }
     private extractData(res: Response) {
         let body = res.json();
         return body.data || {};
@@ -22,9 +22,35 @@ export class Proxy {
         console.error(error.message || error);
         return Promise.reject(error.message || error);
     }
+    Authenticate(i_Params_Authenticate: Params_Authenticate): Observable<Authentication_Info> {
+        this.url = this.APIBaseUrl + '/Authenticate?Ticket=' + this.ticket;
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
+        const options = new RequestOptions({ headers: headers });
+        return this.api.post(this.url, JSON.stringify(i_Params_Authenticate), options)
+            .map((res: Response) => {
+                const body = res.json();
+                let ret: Authentication_Info = new Authentication_Info();
+                ret = SerializationHelper.toInstance(ret, JSON.stringify(body.My_Result));
+                return ret;
+            })
+            .catch(this.handleErrorPromise);
+    }
+    Get_Category_By_OWNER_ID(i_Params_Get_Category_By_OWNER_ID: Params_Get_Category_By_OWNER_ID): Observable<Category[]> {
+        this.url = this.APIBaseUrl + '/Get_Category_By_OWNER_ID?Ticket=' + this.ticket;
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
+        const options = new RequestOptions({ headers: headers });
+        return this.api.post(this.url, JSON.stringify(i_Params_Get_Category_By_OWNER_ID), options)
+            .map((res: Response) => {
+                const body = res.json();
+                let ret: Category[] = [];
+                ret = SerializationHelper.toInstance(ret, JSON.stringify(body.My_Result));
+                return ret;
+            })
+            .catch(this.handleErrorPromise);
+    }
     Edit_Feature(i_Feature: Feature): Observable<Feature> {
         this.url = this.APIBaseUrl + '/Edit_Feature?Ticket=' + this.ticket;
-        const headers = new Headers({ 'Content-Type': 'application/json','ticket': this.ticket});
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
         const options = new RequestOptions({ headers: headers });
         return this.api.post(this.url, JSON.stringify(i_Feature), options)
             .map((res: Response) => {
@@ -35,16 +61,19 @@ export class Proxy {
             })
             .catch(this.handleErrorPromise);
     }
-    Delete_Feature(i_Params_Delete_Feature: Params_Delete_Feature): void {
+    Delete_Feature(i_Params_Delete_Feature: Params_Delete_Feature): Observable<void> {
         this.url = this.APIBaseUrl + '/Delete_Feature?Ticket=' + this.ticket;
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
         const options = new RequestOptions({ headers: headers });
-        this.api.post(this.url, JSON.stringify(i_Params_Delete_Feature), options)
+        return this.api.post(this.url, JSON.stringify(i_Params_Delete_Feature), options)
+            .map((res: Response) => {
+                return;
+            })
             .catch(this.handleErrorPromise);
     }
     Get_Feature_By_OWNER_ID(i_Params_Get_Feature_By_OWNER_ID: Params_Get_Feature_By_OWNER_ID): Observable<Feature[]> {
         this.url = this.APIBaseUrl + '/Get_Feature_By_OWNER_ID?Ticket=' + this.ticket;
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
         const options = new RequestOptions({ headers: headers });
         return this.api.post(this.url, JSON.stringify(i_Params_Get_Feature_By_OWNER_ID), options)
             .map((res: Response) => {
@@ -57,7 +86,7 @@ export class Proxy {
     }
     Edit_Gender(i_Gender: Gender): Observable<Gender> {
         this.url = this.APIBaseUrl + '/Edit_Gender?Ticket=' + this.ticket;
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
         const options = new RequestOptions({ headers: headers });
         return this.api.post(this.url, JSON.stringify(i_Gender), options)
             .map((res: Response) => {
@@ -68,16 +97,19 @@ export class Proxy {
             })
             .catch(this.handleErrorPromise);
     }
-    Delete_Gender(i_Params_Delete_Gender: Params_Delete_Gender): void {
+    Delete_Gender(i_Params_Delete_Gender: Params_Delete_Gender): Observable<void> {
         this.url = this.APIBaseUrl + '/Delete_Gender?Ticket=' + this.ticket;
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
         const options = new RequestOptions({ headers: headers });
-        this.api.post(this.url, JSON.stringify(i_Params_Delete_Gender), options)
+        return this.api.post(this.url, JSON.stringify(i_Params_Delete_Gender), options)
+            .map((res: Response) => {
+                return;
+            })
             .catch(this.handleErrorPromise);
     }
     Get_Gender_By_OWNER_ID(i_Params_Get_Gender_By_OWNER_ID: Params_Get_Gender_By_OWNER_ID): Observable<Gender[]> {
         this.url = this.APIBaseUrl + '/Get_Gender_By_OWNER_ID?Ticket=' + this.ticket;
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
         const options = new RequestOptions({ headers: headers });
         return this.api.post(this.url, JSON.stringify(i_Params_Get_Gender_By_OWNER_ID), options)
             .map((res: Response) => {
@@ -90,7 +122,7 @@ export class Proxy {
     }
     Edit_Profession(i_Profession: Profession): Observable<Profession> {
         this.url = this.APIBaseUrl + '/Edit_Profession?Ticket=' + this.ticket;
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
         const options = new RequestOptions({ headers: headers });
         return this.api.post(this.url, JSON.stringify(i_Profession), options)
             .map((res: Response) => {
@@ -101,16 +133,19 @@ export class Proxy {
             })
             .catch(this.handleErrorPromise);
     }
-    Delete_Profession(i_Params_Delete_Profession: Params_Delete_Profession): void {
+    Delete_Profession(i_Params_Delete_Profession: Params_Delete_Profession): Observable<void> {
         this.url = this.APIBaseUrl + '/Delete_Profession?Ticket=' + this.ticket;
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
         const options = new RequestOptions({ headers: headers });
-        this.api.post(this.url, JSON.stringify(i_Params_Delete_Profession), options)
+        return this.api.post(this.url, JSON.stringify(i_Params_Delete_Profession), options)
+            .map((res: Response) => {
+                return;
+            })
             .catch(this.handleErrorPromise);
     }
     Get_Profession_By_OWNER_ID(i_Params_Get_Profession_By_OWNER_ID: Params_Get_Profession_By_OWNER_ID): Observable<Profession[]> {
         this.url = this.APIBaseUrl + '/Get_Profession_By_OWNER_ID?Ticket=' + this.ticket;
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
         const options = new RequestOptions({ headers: headers });
         return this.api.post(this.url, JSON.stringify(i_Params_Get_Profession_By_OWNER_ID), options)
             .map((res: Response) => {
@@ -123,7 +158,7 @@ export class Proxy {
     }
     Edit_Person(i_Person: Person): Observable<Person> {
         this.url = this.APIBaseUrl + '/Edit_Person?Ticket=' + this.ticket;
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
         const options = new RequestOptions({ headers: headers });
         return this.api.post(this.url, JSON.stringify(i_Person), options)
             .map((res: Response) => {
@@ -134,16 +169,19 @@ export class Proxy {
             })
             .catch(this.handleErrorPromise);
     }
-    Delete_Person(i_Params_Delete_Person: Params_Delete_Person): void {
+    Delete_Person(i_Params_Delete_Person: Params_Delete_Person): Observable<void> {
         this.url = this.APIBaseUrl + '/Delete_Person?Ticket=' + this.ticket;
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
         const options = new RequestOptions({ headers: headers });
-        this.api.post(this.url, JSON.stringify(i_Params_Delete_Person), options)
+        return this.api.post(this.url, JSON.stringify(i_Params_Delete_Person), options)
+            .map((res: Response) => {
+                return;
+            })
             .catch(this.handleErrorPromise);
     }
     Get_Person_By_Where(i_Params_Get_Person_By_Where: Params_Get_Person_By_Where): Observable<Person[]> {
         this.url = this.APIBaseUrl + '/Get_Person_By_Where?Ticket=' + this.ticket;
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
         const options = new RequestOptions({ headers: headers });
         return this.api.post(this.url, JSON.stringify(i_Params_Get_Person_By_Where), options)
             .map((res: Response) => {
@@ -154,6 +192,38 @@ export class Proxy {
             })
             .catch(this.handleErrorPromise);
     }
+    Get_Person_By_OWNER_ID(i_Params_Get_Person_By_OWNER_ID: Params_Get_Person_By_OWNER_ID): Observable<Person[]> {
+        this.url = this.APIBaseUrl + '/Get_Person_By_OWNER_ID?Ticket=' + this.ticket;
+        const headers = new Headers({ 'Content-Type': 'application/json', 'ticket': this.ticket });
+        const options = new RequestOptions({ headers: headers });
+        return this.api.post(this.url, JSON.stringify(i_Params_Get_Person_By_OWNER_ID), options)
+            .map((res: Response) => {
+                const body = res.json();
+                let ret: Person[] = [];
+                ret = SerializationHelper.toInstance(ret, JSON.stringify(body.My_Result));
+                return ret;
+            })
+            .catch(this.handleErrorPromise);
+    }
+}
+export class Params_Authenticate {
+    USER_NAME: string;
+    PASSWORD: string;
+}
+export class Authentication_Info {
+    IsValid: boolean;
+    Ticket: string;
+}
+export class Params_Get_Category_By_OWNER_ID {
+    OWNER_ID?: number;
+}
+export class Category {
+    CATEGORY_ID?: number;
+    TITLE: string;
+    DESCRIPTION: string;
+    ENTRY_USER_ID?: number;
+    ENTRY_DATE: string;
+    OWNER_ID?: number;
 }
 export class Feature {
     FEATURE_ID?: number;
@@ -226,6 +296,9 @@ export class Params_Get_Person_By_Where {
     START_ROW?: number;
     END_ROW?: number;
     TOTAL_COUNT?: number;
+}
+export class Params_Get_Person_By_OWNER_ID {
+    OWNER_ID?: number;
 }
 class SerializationHelper {
     static toInstance<T>(obj: T, json: string): T {

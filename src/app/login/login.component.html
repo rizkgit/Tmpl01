@@ -1,0 +1,23 @@
+<div class="text-center">
+  <img src="../assets/images/logo.jpg" class="LogoImage text-center">
+  <h1 class="Header text-center">Application</h1>
+</div>
+
+<div class="container text-center">
+  <div class="row logInForm">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <md-card [formGroup]="logInForm" (ngSubmit)="Authenticate()">
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="Username" [(ngModel)]="param.USERNAME" formControlName="usernameTxt">
+        </md-form-field>
+        <md-form-field class="example-full-width">
+          <input type="password" mdInput placeholder="Password" [(ngModel)]="param.PASSWORD" formControlName="passwordTxt">
+        </md-form-field>
+      </md-card>
+      <br>
+      <button md-raised-button color="warn" class="fullWidth" (click)="Authenticate()" [disabled]="!logInForm.valid">Login</button>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>

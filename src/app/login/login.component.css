@@ -1,0 +1,20 @@
+.LogoImage{
+    margin-top: 60px;
+}
+
+.coll{
+    margin-top: 15px;
+}
+
+.logInForm{
+    margin-top: 40px;
+}
+
+
+.fullWidth{
+    width: 100%;
+}
+
+input .ng-invalid{
+    /*border: 1px solid red;*/
+}

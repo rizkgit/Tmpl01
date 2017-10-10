@@ -61,11 +61,23 @@
                 <span class="input-group-addon"><i class="fa fa-keyboard-o"></i></span>
                 <textarea class="form-control custom-control" rows="3" style="resize:none" name="Txt_SUMMARY" [(ngModel)]='person.SUMMARY'></textarea>
             </div>
-        </div>
-        <div class="btn-group btn-group-justified">
-            <a href="#" class="btn btn-primary" (click)='Edit_Person()'>Save</a>
-            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">Delete</a>
-        </div>
+        </div>  
+        <div class="text-center">
+                <div class="btn-group btn-group-justified">
+                   <a class="btn btn-md btn-primary" (click)='Edit_Person()'>Save</a>
+                   <a class="btn btn-md btn-danger" data-toggle="modal" data-target="#confirm-delete" >Delete</a>
+                </div>
+             </div>  
+        <!-- <div class="row">
+        <div class="btn-toolbar">              
+            <div class="btn-group">
+                    <a class="btn btn-primary" (click)='Edit_Person()' style='width:45%;'>Save</a>
+             </div>
+             <div class="btn-group">
+                    <a class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" style='width:45%;'>Delete</a>
+             </div>            
+        </div> -->
+    <!-- </div> -->
     </form>
 </div>
 
@@ -80,7 +92,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-danger btn-ok" data-dismiss="modal">Delete</a>
+                <a class="btn btn-danger btn-ok" data-dismiss="modal" (click)='Delete_Person(person)'>Delete</a>
             </div>
         </div>
     </div>

@@ -8,15 +8,14 @@
             <label for="Search_Txt_LAST_NAME">Last Name</label>
             <input type="email" class="form-control" id="Search_Txt_LAST_NAME" [(ngModel)]='searchCriteria.LAST_NAME'>
         </div>
-        <!-- <button type="submit" class="btn btn-primary" (click)='Fetch_Data()'>Search</button> -->
     </div>
 </div>
 <div class="container">
     <div class="btn-group btn-group-justified">
-        <a href="#" class="btn btn-primary" (click)='Fetch_Data()'>
+        <a  class="btn btn-primary" (click)='Fetch_Data()'>
             <span class="glyphicon glyphicon-search"></span> Search
         </a>
-        <a href="#" class="btn btn-info" (click)='Add_Person()'>
+        <a  class="btn btn-info" (click)='Add_Person()'>
             <span class="glyphicon glyphicon-plus"></span> Add
         </a>
     </div>
